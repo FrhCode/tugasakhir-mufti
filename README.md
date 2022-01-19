@@ -1,0 +1,2 @@
+# tugasakhir
+Sistem Pendiagnosa Epilepsi
