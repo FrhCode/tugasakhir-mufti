@@ -32,6 +32,7 @@ Route::post('/postregister',[AuthController::class, 'postregister']);
 
 // Dashboard
 Route::get('/dashboard', [ PagesController::class, 'index' ])->middleware('auth');
+Route::get('/tentang', [ PagesController::class, 'tentang' ]);
 
 // Penyakit
 Route::get('/admin/penyakit', [DiseasesController::class, 'index'])->middleware('auth', 'admin');

@@ -15,4 +15,8 @@ class PagesController extends Controller
         $data_pengetahuan = Knowledge::all();
         return view('pages.index', compact('data_penyakit', 'data_gejala', 'data_pengetahuan'));
     }
+
+    public function tentang() {
+        return view('pages.tentang');
+    }
 }
