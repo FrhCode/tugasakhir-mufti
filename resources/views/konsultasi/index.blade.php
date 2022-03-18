@@ -37,8 +37,8 @@
                             <hr>
                   </div>
                 @endforeach
-                <button type="submit" class="btn btn-success mr-2">Check</button>
-                <a href="/dashboard"><button type="button" class="btn btn-light mr-2">Cancel</button></a>
+                <button type="submit" class="btn btn-success mr-2">Diagnosa</button>
+                <a href="/dashboard"><button type="button" class="btn btn-light mr-2">Batal</button></a>
               </form>
         </div>
       </div>

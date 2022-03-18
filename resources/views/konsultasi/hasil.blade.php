@@ -96,7 +96,7 @@
           <hr>
           <div class="d-flex">
             <div class="mt-3 mt-1">
-              <a href="/konsultasi"><button type="button" class="btn btn-light mr-2 text-success">Try Again</button></a>
+              <a href="/konsultasi"><button type="button" class="btn btn-light mr-2 text-success">Coba Lagi</button></a>
             </div>
             <div class="mt-3">
               <a href="/dashboard"><button type="button" class="btn btn-primary mr-2 text-light hasil-diagnosa-button">Dashboard</button></a>

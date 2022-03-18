@@ -62,7 +62,7 @@
       @if (Auth::check())
         <a href="/dashboard" class="appointment-btn scrollto">Dashboard</a>  
       @else
-        <a href="/login" class="appointment-btn scrollto">Sign In</a> 
+        <a href="/login" class="appointment-btn scrollto">Masuk</a> 
       @endif
 
     </div>
