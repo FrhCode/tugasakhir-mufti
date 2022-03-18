@@ -15,115 +15,94 @@ class ConsultationsController extends Controller
         return view('konsultasi.index', compact('data_gejala'));
     }
 
-    public function calculate(Request $request)
-    {
-        // // Check if page has refreshed, then redirect
-        // if ($request->session()->has('page_reload')) {
-        //     return redirect('/konsultasi');
-        // }
-        // Store CF expert * CF User
-        $hasilkali = [];
-        $gejala_pasien = $request->except('_token');
-        $data_pengetahuan = Knowledge::all();
-
-        // Very IMPORTANT to guard 2 decimal places for numbers
-        function roundOutNumber($number)
-        {
-            $rounded = number_format(floatval($number), 3, '.', '');
-            return $rounded;
-        }
-
-        function calculateCfMultiplier($mb, $md, $user_cf)
-        {
-            return (roundOutNumber($mb) - roundOutNumber($md)) * roundOutNumber($user_cf);
-        }
-
-        function calculateCfCombine($old, $new)
-        {
-            if ($old > 0.00 &&  $new > 0.00) {
+    public function calculateCfCombine($sequential_cf) {
+        $combined_cf = $sequential_cf[0];
+        for ($i=0; $i<count($sequential_cf)-1; $i++) {
+            if ($combined_cf > 0.00 &&  $sequential_cf[$i + 1] > 0.00) {
                 // (CF1+CF2) – (CF1 * CF2)
-                return (roundOutNumber($old) + roundOutNumber($new)) - (roundOutNumber($old) * roundOutNumber($new));
-            } else if ($old < 0.00 &&  $new < 0.00) {
+                $combined_cf = ($combined_cf + $sequential_cf[$i + 1]) - ($combined_cf * $sequential_cf[$i + 1]);
+            } else if ($combined_cf < 0.00 &&  $sequential_cf < 0.00) {
                 //  (CF1+CF2) + (CF1 * CF2)
-                return (roundOutNumber($old) + roundOutNumber($new)) + (roundOutNumber($old) * roundOutNumber($new));
-            } else if ($old < 0.00 || $new < 0.00) {
+                $combined_cf = ($combined_cf + $sequential_cf[$i + 1]) + ($combined_cf * $sequential_cf[$i + 1]);
+            } else if ($combined_cf < 0.00 || $sequential_cf < 0.00) {
                 //  (CF1 + CF2) / ( 1 - min(CF1 | CF2) )
-                return (roundOutNumber($old) + roundOutNumber($new)) / (1 - min(abs(roundOutNumber($old)), abs(roundOutNumber($new))));
+                $combined_cf = ($combined_cf + $sequential_cf[$i + 1]) / (1 - min($combined_cf, $sequential_cf[$i + 1]));
             } else {
-                return 0.00;
-            }
-        }
-
-        function convertToPercent($num)
-        {
-            return roundOutNumber(roundOutNumber($num) * 100.00);
-        }
-
-        // Create a list of CF expert * CF User
-        foreach ($data_pengetahuan as $pengetahuan) {
-            foreach ($gejala_pasien as $key => $value) {
-                // Value Not Empty & It's a match!
-                if ($value != 0.00 && $pengetahuan->symptom_id == $key) {
-                    $hasilkali[$pengetahuan->disease_id]['id'] = $pengetahuan->disease_id;
-                    $hasilkali[$pengetahuan->disease_id]['name'] = $pengetahuan->diseases->name;
-                    $hasilkali[$pengetahuan->disease_id]['gejala'][$pengetahuan->symptom_id] = roundOutNumber(calculateCfMultiplier($pengetahuan->mb, $pengetahuan->md, $value));
-                }
-            }
-
-            if ($hasilkali == [] || array_key_exists($pengetahuan->disease_id, $hasilkali) == false) {
                 continue;
             }
-
-            // Only taking the values from ['gejala'] to calculate CF Combine since we need the index to compare the current and the next CF values
-            $hasilkali[$pengetahuan->disease_id]['cf_gejala'] = array_values($hasilkali[$pengetahuan->disease_id]['gejala']);
-            $hasilkali[$pengetahuan->disease_id]['cf_combine'] = roundOutNumber(0.00);
-            $hasilkali[$pengetahuan->disease_id]['cf_combine_percent'] = roundOutNumber(0.00);
         }
 
+        return $combined_cf;
+    }
 
-        if ($hasilkali != []) {
-            // Calculating CF Combine && CF Combine Percent
-            foreach ($hasilkali as $penyakit => $penyakit_value) {
-                // Declaring count here because we dont want to call count 
-                // Everytime we iterate, that would slow down the loop
-                $count = count($hasilkali[$penyakit]['cf_gejala']) - 1;
+    public function calculateCf(Request $request) {
+        // Data input CF user
+        $gejala_pasien = $request->except('_token');
+        // Simpan input CF user menjadi array
+        $array_gejala = array_values($gejala_pasien);
+        // Ambil data gejala dari database
+        $data_pengetahuan = Knowledge::all();
+        // Simpan data gejala dari database menjadi array
+        $array_pengetahuan = array();
+        // Simpan cf sequensial (CF Pakar * CF User) menjadi array index numeric
+        $cf_multiplied = array();
+        // Simpan cf sekuensial menjadi array assotiative key = ID gejala (G001)
+        $cf_multiplied_key = [];
+        // Simpan cf kombinasi untuk setiap penyakit
+        $array_penyakit = [];
 
-                if ($count == 0) {
-                    $hasilkali[$penyakit]['cf_combine'] = roundOutNumber($hasilkali[$penyakit]['cf_gejala'][0]);
-                    $hasilkali[$penyakit]['cf_combine_percent'] = roundOutNumber(convertToPercent(roundOutNumber($hasilkali[$penyakit]['cf_combine'])));
-                } else {
-                    for ($i = 0; $i < $count; $i++) {
-                        if ($hasilkali[$penyakit]['cf_combine'] == 0.00) {
-                            $cf_combine = roundOutNumber(calculateCfCombine(roundOutNumber($hasilkali[$penyakit]['cf_gejala'][$i]), roundOutNumber($hasilkali[$penyakit]['cf_gejala'][$i + 1])));
-                            $hasilkali[$penyakit]['cf_combine'] = roundOutNumber($cf_combine);
-                        } else {
-                            $cf_combine = calculateCfCombine(roundOutNumber($hasilkali[$penyakit]['cf_combine']), roundOutNumber($hasilkali[$penyakit]['cf_gejala'][$i + 1]));
-                            $hasilkali[$penyakit]['cf_combine'] = roundOutNumber($cf_combine);
-                        }
-                    }
-                    $hasilkali[$penyakit]['cf_combine_percent'] = roundOutNumber(convertToPercent(roundOutNumber($hasilkali[$penyakit]['cf_combine'])));
-                }
+        // Append CF pakar (mb - md) ke array pengetahuan
+        foreach ($data_pengetahuan as $pengetahuan) {
+            array_push($array_pengetahuan, ($pengetahuan->mb - $pengetahuan->md));
+        }
+
+        // Append cf sekuensial (CF Pakar * CF User)
+        for ($i=0; $i<count($array_pengetahuan); $i++) {
+            array_push($cf_multiplied, $array_pengetahuan[$i] * $array_gejala[$i]);
+        }
+
+        // Append cf sekuensial (CF Pakar * CF User) menjadi array assotiative dgn key = ID gejala (G001)
+        for ($i=0; $i<count($cf_multiplied); $i++) {
+            // Kalau i = 2 digit, maka key = G011, G012,G010
+            if (strlen((string)$i + 1) > 1) {
+                $cf_multiplied_key["G0" . strval($i + 1)] = $cf_multiplied[$i];
+            // Kalau i = 1 digit, maka key = G001, G002, dst
+            } else {
+                $cf_multiplied_key["G00" . strval($i + 1)] = $cf_multiplied[$i];
             }
-
-            // // I Dont know about the theory, but we could get negative values, which means the disease is
-            // // not certain at all. So, rather than showing it to the User, i'm filtering it.
-            // $data_hasil = array_filter($hasilkali, function ($penyakit) {
-            //     return $penyakit['cf_combine_percent'] > 0;
-            // });
-            $data_hasil = $hasilkali;
-
-
-            usort($data_hasil, function ($penyakit1, $penyakit2) {
-                return (roundOutNumber($penyakit1['cf_combine_percent']) > roundOutNumber($penyakit2['cf_combine_percent'])) ? -1 : 1;
-            });
-
-            return redirect('/konsultasi/hasil')->with('data_hasil', $data_hasil);
         }
-        // $hasilkali == null is empty, so initialize data_hasil as empty 
-        // So we dont need to pass $hasilkali. In the view theres only $data_hasil,
-        // so we only need to check if $data_hasil is null or not
-        $data_hasil = null;
-        return redirect('/konsultasi/hasil')->with('data_hasil', $data_hasil);
+        
+        // Append cf sekuensial kedalam array penyakit (dikelompokkan berdasarkan ID penyakit)
+        foreach ($data_pengetahuan as $pengetahuan) {
+            if (!array_key_exists($pengetahuan->disease_id, $array_penyakit)){
+                $array_penyakit[$pengetahuan->disease_id] = [];
+                array_push($array_penyakit[$pengetahuan->disease_id], $cf_multiplied_key[$pengetahuan->symptom_id]);
+            } else {
+                array_push($array_penyakit[$pengetahuan->disease_id], $cf_multiplied_key[$pengetahuan->symptom_id]);
+            }
+        }
+
+        // Hitung cf kombinasi untuk setiap array pada setiap penyakit
+        foreach ($array_penyakit as $key => $value) {
+            $array_penyakit[$key] = $this->calculateCfCombine($value);
+            // Jika hasil cf kombinasi == 0, hapus item
+            if ($array_penyakit[$key] == 0.00) {
+                unset($array_penyakit[$key]);
+            }
+        }
+        // Sort associative array DESC
+        arsort($array_penyakit);
+
+        // Ambil data penyakit dari database untuk setiap item
+        foreach ($array_penyakit as $key => $value) {
+            $penyakit = Disease::find($key);
+            $array_penyakit[$key] = [ 'disease' => $penyakit, 'cf' => round($value * 100, 2) ];
+        }
+
+        // Diagnosis adalah penyakit dengan CF kombinasi paling besar
+        $diagnosis = $array_penyakit != [] ? reset($array_penyakit) : 'Tidak ditemukan';
+    
+        return view('konsultasi.hasil', compact('array_penyakit', 'diagnosis'));
     }
 
     public function result(Request $request)

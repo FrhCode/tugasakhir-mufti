@@ -10,7 +10,7 @@
     </div>
   </div>
   <!-- Page Title Header Ends-->
-  @if ($data_hasil == null)
+  @if ($array_penyakit == [])
   <div class="row">
     <div class="col-md-12 grid-margin">
       <div class="card">
@@ -36,16 +36,16 @@
                 <th>Skor Kepastian</th>
               </thead>
               <tbody>
-                @foreach ($data_hasil as $penyakit_id => $penyakit)
+                @foreach ($array_penyakit as $key => $value)
                   <tr>
-                    <td>{{ $penyakit_id + 1 }}</td>
-                    <td>{{ $penyakit['name'] }}</td>
-                    @if ($penyakit['cf_combine_percent'] <= 100.00 && $penyakit['cf_combine_percent'] >= 50.00)
-                      <td class="text-danger">{{ number_format(floatval($penyakit['cf_combine_percent']), 2, '.', '') }}%</td>
-                    @elseif ($penyakit['cf_combine_percent'] < 50.00 && $penyakit['cf_combine_percent'] >= -50.00)
-                      <td class="text-primary">{{ number_format(floatval($penyakit['cf_combine_percent']), 2, '.', '') }}%</td>
+                    <td>{{ array_search($key, array_keys($array_penyakit)) + 1 }}</td>
+                    <td>{{ $value['disease']->name }}</td>
+                    @if ($value['cf'] <= 100.00 && $value['cf'] >= 50.00)
+                      <td class="text-danger">{{ $value['cf'] }}%</td>
+                    @elseif ($value['cf'] < 50.00 && $value['cf'] >= -50.00)
+                      <td class="text-primary">{{ $value['cf'] }}%</td>
                     @else
-                      <td class="text-success">{{ number_format(floatval($penyakit['cf_combine_percent']), 2, '.', '') }}%</td>
+                      <td class="text-success">{{ $value['cf'] }}%</td>
                     @endif
                   </tr>
                 @endforeach
@@ -61,7 +61,7 @@
             </div>
             <div class="col-md-11 col-9 p-0 mb-3">
               <h5>Hasil Diagnosa:</h5>
-              <h3><strong>{{ $diagnosis->name }}</strong></h3>
+              <h3><strong>{{ $diagnosis['disease']->name }}</strong></h3>
             </div>
           </div>
           <hr>
@@ -73,7 +73,7 @@
                   <i class="fas fa-info-circle mr-2 text-light align-middle"></i>
                   <span class="text-light align-middle"><strong>Info Penyakit:</strong></span>
                 </div>
-                <h6 class="card-text text-light">{{ $diagnosis->info }}</h6>
+                <h6 class="card-text text-light">{{ $diagnosis['disease']->info }}</h6>
               </div>
               {{-- Info End --}}
             </div>
@@ -87,7 +87,7 @@
                   </div>
                 </div>
                 <div class="card-body bg-success">
-                  <h6 class="card-text text-light">{{ $diagnosis->advice }}</h6>
+                  <h6 class="card-text text-light">{{ $diagnosis['disease']->advice }}</h6>
                 </div>
               </div>  
             {{--Saran End--}}

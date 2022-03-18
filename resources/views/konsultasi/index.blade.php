@@ -26,7 +26,7 @@
                                 <div class="col-md-3">
                                     <select name="{{$gejala->id}}" class="form-control form-control-sm">
                                       <option value=0.00>--Pilih Jika Sesuai--</option> 
-                                          <option value=0.10>Yakin</option> 
+                                          <option value=1.00>Yakin</option> 
                                           <option value=0.80>Cukup Yakin</option> 
                                           <option value=0.60>Biasa Saja</option> 
                                           <option value=0.40>Kurang Yakin</option> 

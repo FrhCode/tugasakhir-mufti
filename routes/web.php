@@ -63,5 +63,5 @@ Route::get('/admin/pengetahuan/{id}', [KnowledgesController::class, 'destroy'])-
 // Konsultasi
 Route::get('/konsultasi', [ConsultationsController::class, 'index'])->middleware('auth');
 Route::get('/konsultasi/hasil', [ConsultationsController::class, 'result'])->middleware('auth');
-Route::post('/konsultasi/diagnosa', [ConsultationsController::class, 'calculate'])->middleware('auth');
+Route::post('/konsultasi/diagnosa', [ConsultationsController::class, 'calculateCf'])->middleware('auth');
 
