@@ -18,18 +18,19 @@ class ConsultationsController extends Controller
     public function calculateCfCombine($sequential_cf) {
         $combined_cf = $sequential_cf[0];
         for ($i=0; $i<count($sequential_cf)-1; $i++) {
-            if ($combined_cf > 0.00 &&  $sequential_cf[$i + 1] > 0.00) {
-                // (CF1+CF2) – (CF1 * CF2)
-                $combined_cf = ($combined_cf + $sequential_cf[$i + 1]) - ($combined_cf * $sequential_cf[$i + 1]);
-            } else if ($combined_cf < 0.00 &&  $sequential_cf < 0.00) {
-                //  (CF1+CF2) + (CF1 * CF2)
-                $combined_cf = ($combined_cf + $sequential_cf[$i + 1]) + ($combined_cf * $sequential_cf[$i + 1]);
-            } else if ($combined_cf < 0.00 || $sequential_cf < 0.00) {
-                //  (CF1 + CF2) / ( 1 - min(CF1 | CF2) )
-                $combined_cf = ($combined_cf + $sequential_cf[$i + 1]) / (1 - min($combined_cf, $sequential_cf[$i + 1]));
-            } else {
-                continue;
-            }
+            // if ($combined_cf > 0.00 &&  $sequential_cf[$i + 1] > 0.00) {
+            //     // (CF1+CF2) – (CF1 * CF2)
+            //     $combined_cf = ($combined_cf + $sequential_cf[$i + 1]) - ($combined_cf * $sequential_cf[$i + 1]);
+            // } else if ($combined_cf < 0.00 &&  $sequential_cf < 0.00) {
+            //     //  (CF1+CF2) + (CF1 * CF2)
+            //     $combined_cf = ($combined_cf + $sequential_cf[$i + 1]) + ($combined_cf * $sequential_cf[$i + 1]);
+            // } else if ($combined_cf < 0.00 || $sequential_cf < 0.00) {
+            //     //  (CF1 + CF2) / ( 1 - min(CF1 | CF2) )
+            //     $combined_cf = ($combined_cf + $sequential_cf[$i + 1]) / (1 - min($combined_cf, $sequential_cf[$i + 1]));
+            // } else {
+            //     continue;
+            // }
+            $combined_cf = $combined_cf + ($sequential_cf[$i + 1] * (1 - $combined_cf));
         }
 
         return $combined_cf;
@@ -39,36 +40,36 @@ class ConsultationsController extends Controller
         // Data input CF user
         $gejala_pasien = $request->except('_token');
         // Simpan input CF user menjadi array
-        $array_gejala = array_values($gejala_pasien);
+        $cf_user = array_values($gejala_pasien);
         // Ambil data gejala dari database
         $data_pengetahuan = Knowledge::all();
         // Simpan data gejala dari database menjadi array
-        $array_pengetahuan = array();
+        $cf_pakar = array();
         // Simpan cf sequensial (CF Pakar * CF User) menjadi array index numeric
-        $cf_multiplied = array();
+        $cf_sequential = array();
         // Simpan cf sekuensial menjadi array assotiative key = ID gejala (G001)
-        $cf_multiplied_key = [];
+        $cf_sequential_key = [];
         // Simpan cf kombinasi untuk setiap penyakit
         $array_penyakit = [];
-
+        
         // Append CF pakar (mb - md) ke array pengetahuan
         foreach ($data_pengetahuan as $pengetahuan) {
-            array_push($array_pengetahuan, ($pengetahuan->mb - $pengetahuan->md));
+            array_push($cf_pakar, ($pengetahuan->mb - $pengetahuan->md));
         }
-
         // Append cf sekuensial (CF Pakar * CF User)
-        for ($i=0; $i<count($array_pengetahuan); $i++) {
-            array_push($cf_multiplied, $array_pengetahuan[$i] * $array_gejala[$i]);
+        for ($i=0; $i<count($cf_pakar); $i++) {
+            array_push($cf_sequential, $cf_pakar[$i] * $cf_user[$i]);
         }
+        
 
         // Append cf sekuensial (CF Pakar * CF User) menjadi array assotiative dgn key = ID gejala (G001)
-        for ($i=0; $i<count($cf_multiplied); $i++) {
+        for ($i=0; $i<count($cf_sequential); $i++) {
             // Kalau i = 2 digit, maka key = G011, G012,G010
             if (strlen((string)$i + 1) > 1) {
-                $cf_multiplied_key["G0" . strval($i + 1)] = $cf_multiplied[$i];
+                $cf_sequential_key["G0" . strval($i + 1)] = $cf_sequential[$i];
             // Kalau i = 1 digit, maka key = G001, G002, dst
             } else {
-                $cf_multiplied_key["G00" . strval($i + 1)] = $cf_multiplied[$i];
+                $cf_sequential_key["G00" . strval($i + 1)] = $cf_sequential[$i];
             }
         }
         
@@ -76,12 +77,12 @@ class ConsultationsController extends Controller
         foreach ($data_pengetahuan as $pengetahuan) {
             if (!array_key_exists($pengetahuan->disease_id, $array_penyakit)){
                 $array_penyakit[$pengetahuan->disease_id] = [];
-                array_push($array_penyakit[$pengetahuan->disease_id], $cf_multiplied_key[$pengetahuan->symptom_id]);
+                array_push($array_penyakit[$pengetahuan->disease_id], $cf_sequential_key[$pengetahuan->symptom_id]);
             } else {
-                array_push($array_penyakit[$pengetahuan->disease_id], $cf_multiplied_key[$pengetahuan->symptom_id]);
+                array_push($array_penyakit[$pengetahuan->disease_id], $cf_sequential_key[$pengetahuan->symptom_id]);
             }
         }
-
+        
         // Hitung cf kombinasi untuk setiap array pada setiap penyakit
         foreach ($array_penyakit as $key => $value) {
             $array_penyakit[$key] = $this->calculateCfCombine($value);
@@ -92,13 +93,12 @@ class ConsultationsController extends Controller
         }
         // Sort associative array DESC
         arsort($array_penyakit);
-
         // Ambil data penyakit dari database untuk setiap item
         foreach ($array_penyakit as $key => $value) {
             $penyakit = Disease::find($key);
             $array_penyakit[$key] = [ 'disease' => $penyakit, 'cf' => round($value * 100, 2) ];
         }
-
+        
         // Diagnosis adalah penyakit dengan CF kombinasi paling besar
         $diagnosis = $array_penyakit != [] ? reset($array_penyakit) : 'Tidak ditemukan';
     
