@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2021 at 05:06 PM
--- Server version: 10.5.8-MariaDB
--- PHP Version: 7.3.3
+-- Generation Time: Apr 09, 2022 at 08:37 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -42,13 +41,41 @@ CREATE TABLE `diseases` (
 --
 
 INSERT INTO `diseases` (`id`, `name`, `info`, `advice`, `created_at`, `updated_at`) VALUES
-('P001', 'Epilepsi Tonik-Klonik', 'Epilepsi ini paling dikenal diawali dengan gejala hilangnya kesadaran dan penderita sering menangis. Jika berdiri, orang akan terjatuh, tubuh menegang (tonik) dan diikuti sentakan otot (klonik).', 'Pemberian obat ethosuximide dengan dosis 500 mg – 1000 mg', '2021-06-26 20:45:38', '2021-06-28 07:42:18'),
-('P002', 'Epilepsi Absens', 'Kejang ini biasanya dimulai pada masa anak-anak tapi bisa terjadi pada orang dewasa, seringkali keliru dengan melamun ataupun tidak perhatian. Sering ada Riwayat yang sama dalam keluarga.', 'Pemberian obat carbamazepine dengan dosis 600 mg – 1800 mg', '2021-06-26 20:46:14', '2021-06-28 07:42:45'),
-('P003', 'Epilepsi Mioklonik', 'Kejang berlangsung singkat, biasanya sentakan otot secara intens terjadi pada anggota tubuh bagian atas. Sering setelah bangkitan mengakibatkan menjatuhkan dan menumpahkan sesuatu.', 'Pemberian obat felbamate dengan dosis 2400 mg – 3600 mg, melakukan pemeriksaan EEG', '2021-06-26 20:46:48', '2021-06-28 07:43:15'),
-('P004', 'Epilepsi Tonik', 'Gejala dari epilepsi ini terjadi secara mendadak. Kekakuan singkat pada otot seluruh tubuh menyebabkan orang menjadi kaku dan terjatuh jika dalam posisi berdiri. Pemulihannya cepat namun cedera yang terjadi dapat bertahan.', 'Pemberian obat levetiracetam dengan dosis 1000 mg – 3000 mg', '2021-06-26 20:47:20', '2021-06-28 07:43:40'),
-('P005', 'Epilepsi Atonik', 'Gejala dari epilepsi ini terjadi secara mendadak, kehilangan otot, menyebabkan penderita lemas dan terjatuh jika dalam posisi berdiri. Biasanya terjadi cedera dan luka pada kepala. Tidak ada tanda kehilangan kesadaran dan cepat pemulihannya.', 'Melakukan tindakan anamnesis, pemeriksaan fisik pengidap dan diagnosis banding', '2021-06-26 20:47:55', '2021-06-28 07:44:12'),
-('P006', 'Epilepsi Parsial Sederhana', 'Kejang yang pengidapnya tidak kehilangan kesadaran', 'Pemberian dosis obat anti epilepsi (anti konsulvan) yang tepat sesuai aturan dokter ahli syaraf', '2021-06-28 07:45:29', '2021-06-28 07:45:29'),
-('P007', 'Epilepsi Parsial Kompleks', 'Terkadang kejang focal mempengaruhi kesadaran pengidapnya', 'Pemberian dosis obat anti epilepsy (anti konsulvan) yang tepat sesuai aturan dokter ahli syaraf', '2021-06-28 07:45:54', '2021-06-28 07:45:54');
+('P001', 'Epilepsi Tonik Klonik', 'Bangkitan berurutan berupa bangkitan tonik diikuti bangkitan klonik', '-', '2021-06-26 20:45:38', '2022-04-01 22:55:10'),
+('P002', 'Epilepsi Absans', 'Terhentinya aktivitas yang sedang dilakukan secara mendadak, tatapan kosong, dapat disertai deviasi mata ke atas.Biasanya tidak merespon saat diajak bicara.', '-', '2021-06-26 20:46:14', '2022-04-01 22:58:50'),
+('P003', 'Epilepsi Mioklonik', 'Gerakan involunter tiba-tiba, singkat kurang dari 100 milidetik, berupa kontraksi otot tunggal atau multipel pada anggota gerak proksimal, distal atau aksial.', '-', '2021-06-26 20:46:48', '2022-04-01 21:04:25'),
+('P004', 'Epilepsi Tonik', 'Peningkatan kontaksi otot yang berlangsung beberapa detik sampai beberapa menit', '-', '2021-06-26 20:47:20', '2022-04-01 21:06:41'),
+('P005', 'Epilepsi Atonik', 'Hilang atau berkurangnya tonus otot mendadak tanpa adanya mioklonik atau tonik sebelumnya. Berlangsung 1-2 detik, melibatkan kepala, tubuh, rahang atau ekstremitas atas dan bawah.', '-', '2021-06-26 20:47:55', '2022-04-01 20:58:05'),
+('P006', 'Epilepsi Spasms', 'Gerakan mendadak berupa fleksi, ekstensi, atau gabungan ekstensi dan fleksi otot proksimal dan otot batang tubuh (truncal)', '-', '2022-03-31 02:07:38', '2022-04-01 21:01:31'),
+('P007', 'Epilepsi Automatism', 'Aktivitas motorik yang terkoordinasi, sering menyerupai gerak volunter. Biasanya muncul dengan gangguan kesadaran hingga setelahnya pasien tidak ingat.', '-', '2022-03-31 02:08:12', '2022-04-01 21:10:26'),
+('P008', 'Epilepsi Klonik', 'Gerak menghentak-hentak, simetris atau asimetris, ;berulang secara regular.', '-', '2022-03-31 02:05:46', '2022-04-01 20:59:29'),
+('P009', 'Epilepsi Autonomic', 'Perubahan sistem saraf otonom yang melibatkan kardiovaskular , pupil, gastrointestinal, sudomotor, vasomotor dan termoregulasi.', '-', '2022-04-01 20:52:53', '2022-04-01 21:18:32'),
+('P010', 'Epilepsi Mioklonik Tonik Klonik', 'Bangkitan mioklonik diikuti dengan bangkitan tonik-klonik. Tipe bangkitan ini umum ditemui pada juvenille myoclonic epilepsy', '-', '2022-04-01 22:46:03', '2022-04-01 22:46:03'),
+('P011', 'Epilepsi Mioklonik Atonik', 'Bangkitan mioklonik diikuti dengan bangkitan atonik', '-', '2022-04-01 22:47:24', '2022-04-01 22:47:24'),
+('P012', 'Epilepsi Behavior Arrest', 'Henti aktivitas sesaat, freezing, imobilisasi', '-', '2022-04-01 22:51:35', '2022-04-01 22:51:35'),
+('P013', 'Epilepsi Atypical Absence', 'Bangkitan menyerupai typical absence namun onset dan terhentinya bangkitan kurang mendadak', '-', '2022-04-01 22:54:35', '2022-04-01 22:54:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `epilepsi`
+--
+
+CREATE TABLE `epilepsi` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `epilepsi`
+--
+
+INSERT INTO `epilepsi` (`id`, `created_at`, `updated_at`, `nama`, `alamat`) VALUES
+(1, NULL, NULL, 'Kang Ersa', 'Bandung'),
+(2, NULL, NULL, 'Mufti', 'Garut');
 
 -- --------------------------------------------------------
 
@@ -87,18 +114,26 @@ CREATE TABLE `knowledges` (
 --
 
 INSERT INTO `knowledges` (`id`, `disease_id`, `symptom_id`, `mb`, `md`, `created_at`, `updated_at`) VALUES
-(1, 'P001', 'G001', '0.80', '0.20', '2021-06-26 06:29:45', '2021-06-30 07:16:10'),
-(2, 'P001', 'G002', '0.40', '0.20', '2021-06-26 06:30:10', '2021-06-30 07:16:35'),
-(3, 'P001', 'G003', '1.00', '0.20', '2021-06-26 06:30:29', '2021-06-30 07:18:00'),
-(4, 'P002', 'G004', '0.60', '0.20', '2021-06-26 06:30:47', '2021-06-30 07:18:24'),
-(5, 'P002', 'G005', '0.80', '0.20', '2021-06-26 06:30:59', '2021-06-30 07:18:43'),
-(6, 'P002', 'G006', '0.40', '0.20', '2021-06-26 06:31:17', '2021-06-30 07:18:59'),
-(7, 'P002', 'G007', '0.60', '0.20', '2021-06-26 21:00:30', '2021-06-30 07:19:15'),
-(8, 'P003', 'G008', '1.00', '0.20', '2021-06-26 21:00:45', '2021-06-30 07:19:35'),
-(9, 'P004', 'G009', '0.40', '0.20', '2021-06-26 21:01:05', '2021-06-30 07:19:58'),
-(10, 'P005', 'G010', '0.60', '0.20', '2021-06-26 21:01:23', '2021-06-30 07:20:19'),
-(11, 'P006', 'G011', '0.80', '0.20', '2021-06-26 21:01:43', '2021-06-30 07:20:36'),
-(12, 'P007', 'G012', '1.00', '0.20', '2021-06-26 21:03:49', '2021-06-30 07:20:47');
+(1, 'P001', 'G001', '1.00', '0.00', '2022-03-31 02:40:46', '2022-03-31 02:40:46'),
+(2, 'P002', 'G002', '0.80', '0.00', '2022-03-31 02:41:10', '2022-03-31 02:41:10'),
+(3, 'P001', 'G003', '1.00', '0.00', '2022-03-31 02:41:39', '2022-03-31 02:41:39'),
+(4, 'P002', 'G004', '1.00', '0.00', '2022-03-31 02:42:23', '2022-03-31 02:42:23'),
+(5, 'P006', 'G013', '1.00', '0.00', '2022-03-31 02:42:59', '2022-03-31 02:42:59'),
+(6, 'P002', 'G005', '1.00', '0.00', '2022-03-31 02:43:30', '2022-03-31 02:43:30'),
+(7, 'P005', 'G006', '1.00', '0.00', '2022-03-31 02:44:06', '2022-03-31 02:44:06'),
+(9, 'P003', 'G007', '1.00', '0.00', '2022-03-31 02:45:26', '2022-03-31 02:45:26'),
+(10, 'P007', 'G008', '1.00', '0.00', '2022-03-31 02:46:08', '2022-03-31 02:46:08'),
+(11, 'P005', 'G009', '1.00', '0.00', '2022-03-31 02:46:42', '2022-03-31 02:46:42'),
+(12, 'P006', 'G010', '0.80', '0.00', '2022-03-31 02:47:13', '2022-03-31 02:47:13'),
+(13, 'P008', 'G011', '0.80', '0.00', '2022-03-31 02:47:39', '2022-03-31 02:47:39'),
+(14, 'P004', 'G012', '0.80', '0.00', '2022-03-31 02:48:14', '2022-03-31 02:48:14'),
+(15, 'P009', 'G013', '0.80', '0.00', '2022-04-08 23:07:44', '2022-04-08 23:07:44'),
+(16, 'P010', 'G012', '1.00', '0.00', '2022-04-08 23:11:12', '2022-04-08 23:11:12'),
+(17, 'P010', 'G016', '1.00', '0.00', '2022-04-08 23:12:42', '2022-04-08 23:12:42'),
+(18, 'P011', 'G014', '1.00', '0.00', '2022-04-08 23:13:53', '2022-04-08 23:13:53'),
+(19, 'P012', 'G015', '0.80', '0.00', '2022-04-08 23:14:18', '2022-04-08 23:14:18'),
+(20, 'P013', 'G001', '1.00', '0.00', '2022-04-08 23:17:08', '2022-04-08 23:17:08'),
+(21, 'P008', 'G010', '0.80', '0.00', '2022-04-08 23:19:32', '2022-04-08 23:19:32');
 
 -- --------------------------------------------------------
 
@@ -122,7 +157,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2021_06_22_111907_create_diseases_table', 2),
 (5, '2021_06_23_050257_create_symptoms_table', 3),
-(9, '2021_06_23_060213_create_knowledges_table', 4);
+(9, '2021_06_23_060213_create_knowledges_table', 4),
+(10, '2021_07_05_231547_create_epilepsi_table', 5),
+(11, '2021_07_07_073603_create_skripsi_table', 6);
 
 -- --------------------------------------------------------
 
@@ -135,6 +172,29 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skripsi`
+--
+
+CREATE TABLE `skripsi` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `now` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `skripsi`
+--
+
+INSERT INTO `skripsi` (`id`, `now`, `alamat`, `created_at`, `updated_at`) VALUES
+(1, 'Hari ini hari Selasa', 'Bogor', NULL, NULL),
+(2, 'Hari ini hari Rabu', 'Garut', NULL, NULL),
+(3, 'Hari ini Hari Kamis', 'Bandung', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -155,18 +215,22 @@ CREATE TABLE `symptoms` (
 --
 
 INSERT INTO `symptoms` (`id`, `name`, `info`, `created_at`, `updated_at`) VALUES
-('G001', 'Hilang Kesadaran', 'Penderita kehilangan kesadaran, tubuh menegang, bernafas dangkal, bibir kulit terlihat keabuan dan sakit kepala', '2021-06-28 07:57:28', '2021-06-28 07:57:28'),
-('G002', 'Tubuh menegang', 'Penderita kehilangan kesadaran, tubuh menegang, bernafas dangkal, bibir kulit terlihat keabuan dan sakit kepala', '2021-06-28 07:57:45', '2021-06-28 07:57:45'),
-('G003', 'Nafas dangkal', 'Penderita kehilangan kesadaran, tubuh menegang, bernafas dangkal, bibir kulit terlihat keabuan dan sakit kepala', '2021-06-28 07:58:03', '2021-06-28 07:58:03'),
-('G004', 'Melamun', 'Penderita melamun atau tidak perhatian, menatap kosong, hilang ekspresi, tidak ada respon, menghentikan aktifitas yang dilakukan dan mengedipkan mata dengan cepat', '2021-06-28 07:58:51', '2021-06-28 07:58:51'),
-('G005', 'Menatap kosong', 'Penderita melamun atau tidak perhatian, menatap kosong, hilang ekspresi, tidak ada respon, menghentikan aktifitas yang dilakukan dan mengedipkan mata dengan cepat', '2021-06-28 07:59:09', '2021-06-28 07:59:09'),
-('G006', 'Hilang ekspresi', 'Penderita melamun atau tidak perhatian, menatap kosong, hilang ekspresi, tidak ada respon, menghentikan aktifitas yang dilakukan dan mengedipkan mata dengan cepat', '2021-06-28 07:59:24', '2021-06-28 07:59:24'),
-('G007', 'Tidak merespon', 'Penderita melamun atau tidak perhatian, menatap kosong, hilang ekspresi, tidak ada respon, menghentikan aktifitas yang dilakukan dan mengedipkan mata dengan cepat', '2021-06-28 07:59:40', '2021-06-28 07:59:40'),
-('G008', 'Sentakan otot secara intens', 'Kejang berlangsung singkat, disertai sentakan otot secara intens pada anggota tubuh bagian atas dan menjatuhkan atau menumpahkan sesuatu', '2021-06-28 08:09:35', '2021-06-28 08:09:35'),
-('G009', 'Kekakuan pada otot', 'Gejala terjadi secara mendadak, kekakuan singkat pada otot di seluruh tubuh dan terjatuh dalam posisi berdiri', '2021-06-28 08:10:22', '2021-06-28 08:10:22'),
-('G010', 'Penurunan Kesadaran', 'Gejala terjadi secara mendadak, kehilangan kekuatan otot, menyebabkan penderita lemas dan terjatuh jika dalam posisi berdiri', '2021-06-28 08:10:47', '2021-06-28 08:11:59'),
-('G011', 'Terlihat bingung', 'Kejang singkat, tidak ada penurunan kesadaran dan gejala berlangsung selama kurang dari satu menit', '2021-06-28 08:11:43', '2021-06-28 08:11:43'),
-('G012', 'Gelisah', 'Penderita menatap kosong, kehilangan ekspresi, terlihat bingung, kesadaran terganggu, menampilkan perilaku yang tidak biasa dan gelisah', '2021-06-28 08:12:24', '2021-06-28 08:12:24');
+('G001', 'Hilang Kesadaran', '-', '2021-06-28 07:57:28', '2022-04-01 10:53:14'),
+('G002', 'Tanpa hilang kesadaran', '-', '2021-06-28 07:57:45', '2022-03-31 01:52:18'),
+('G003', 'Kelojotan anggota gerak', '-', '2021-06-28 07:58:03', '2022-03-31 01:52:48'),
+('G004', 'Mulut Berbusa', '-', '2021-06-28 07:58:51', '2022-03-31 01:53:16'),
+('G005', 'Melamun (Bengong)', '-', '2021-06-28 07:59:09', '2022-03-31 01:53:45'),
+('G006', 'Kekakuan anggota gerak', '-', '2021-06-28 07:59:24', '2022-03-31 01:54:12'),
+('G007', 'Mulut Mengecap-ngecap', '-', '2021-06-28 07:59:40', '2022-03-31 01:54:45'),
+('G008', 'Terlihat bingung setelah kejang', '-', '2021-06-28 08:09:35', '2022-03-31 01:55:14'),
+('G009', 'Lidah tergigit', '-', '2021-06-28 08:10:22', '2022-03-31 01:55:53'),
+('G010', 'Hilang Penglihatan Mendadak', '-', '2021-06-28 08:12:24', '2022-04-01 11:04:40'),
+('G011', 'Hilang Pendengaran Mendadak', '-', '2022-03-27 10:23:08', '2022-04-01 20:43:04'),
+('G012', 'Kejang Menghentak', '-', '2022-03-27 10:25:59', '2022-04-01 20:44:16'),
+('G013', 'Mengompol', '-', '2022-03-27 10:31:23', '2022-03-31 01:59:15'),
+('G014', 'Pucat dan Berkeringat', '-', '2022-04-01 10:55:02', '2022-04-01 10:55:02'),
+('G015', 'Mengantuk Setelah Serangan', '-', '2022-04-01 11:09:33', '2022-04-01 11:09:33'),
+('G016', 'Tubuh Berguling', '-', '2022-04-01 11:10:19', '2022-04-01 11:10:19');
 
 -- --------------------------------------------------------
 
@@ -191,9 +255,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `is_admin`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Nabil', 'cucibaju123@gmail.com', b'0', NULL, '$2y$10$W4suineTxfBKXUfZS95LXeJNY6wahNIMEdf2Vn7moJZIIAzrSEPOG', NULL, '2021-06-22 01:58:06', '2021-06-22 01:58:06'),
-(3, 'Nabol', 'admin@example.com', b'1', NULL, '$2y$10$xrpOXnyIyHN86aqyP0WV0uZQ.0K2hUMNRUROM99BmCGANm3FfmXIK', NULL, '2021-06-22 02:12:07', '2021-06-22 02:12:07'),
-(5, 'Mufti', 'mufti@example.com', b'0', NULL, '$2y$10$5RIquQOjFoyzlfo9ArjrEujFnW7eahKtWnkPvW2lPHUKLG1jeNRP2', NULL, '2021-06-22 06:08:44', '2021-06-22 06:08:44');
+(1, 'Raden', 'cucibaju123@gmail.com', b'0', NULL, '$2y$10$W4suineTxfBKXUfZS95LXeJNY6wahNIMEdf2Vn7moJZIIAzrSEPOG', NULL, '2021-06-22 01:58:06', '2021-06-22 01:58:06'),
+(3, 'Mufti', 'admin@example.com', b'1', NULL, '$2y$10$xrpOXnyIyHN86aqyP0WV0uZQ.0K2hUMNRUROM99BmCGANm3FfmXIK', NULL, '2021-06-22 02:12:07', '2021-06-22 02:12:07'),
+(5, 'Ahmad Fauzi', 'mufti@example.com', b'0', NULL, '$2y$10$5RIquQOjFoyzlfo9ArjrEujFnW7eahKtWnkPvW2lPHUKLG1jeNRP2', NULL, '2021-06-22 06:08:44', '2021-06-22 06:08:44'),
+(6, 'Muhammad', 'mulianurlatifah7@gmail.com', b'0', NULL, '$2y$10$WA5AMR39dn0DmAZtjAHzqus1MIhuN3JqhoX5Bpz6cX/YM8BuWnKPS', NULL, '2022-01-19 05:34:17', '2022-01-19 05:34:17'),
+(7, 'Mufti Ahmad', 'r.muftiahmadf@gmail.com', b'0', NULL, '$2y$10$K8XMcScqceRdr9Utan0c.ejs.fAU3Z/bNCjY64DzM1KQEW7YoCkja', NULL, '2022-03-05 03:19:47', '2022-03-05 03:19:47'),
+(8, 'Ahmad Muhammad', 'ahsanehsan@yahoo.com', b'0', NULL, '$2y$10$NJvyxxWs4U/A.6FVmnUXUe3zYAZxTypGZERGm7bdXGVx04hs3ywGK', NULL, '2022-03-15 07:07:55', '2022-03-15 07:07:55');
 
 --
 -- Indexes for dumped tables
@@ -203,6 +270,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `is_admin`, `email_verified_at`, `pa
 -- Indexes for table `diseases`
 --
 ALTER TABLE `diseases`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `epilepsi`
+--
+ALTER TABLE `epilepsi`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -232,6 +305,12 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `skripsi`
+--
+ALTER TABLE `skripsi`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `symptoms`
 --
 ALTER TABLE `symptoms`
@@ -249,6 +328,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `epilepsi`
+--
+ALTER TABLE `epilepsi`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -258,19 +343,25 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `knowledges`
 --
 ALTER TABLE `knowledges`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `skripsi`
+--
+ALTER TABLE `skripsi`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

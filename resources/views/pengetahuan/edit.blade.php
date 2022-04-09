@@ -29,11 +29,11 @@
                 </div>
                 <div class="form-group">
                   <label for="pengetahuanmb">Nilai Kepastian (MB)</label>
-                  <input id="pengetahuanmb" name="mb" type="number" step=0.01 max=1.00 min=0.20 class="form-control" value="{{$pengetahuan->mb}}"  placeholder="Masukkan nilai kepastian">
+                  <input id="pengetahuanmb" name="mb" type="number" step=0.01 max=1.00 min=0.00 class="form-control" value="{{$pengetahuan->mb}}"  placeholder="Masukkan nilai kepastian">
                 </div>
                 <div class="form-group">
                   <label for="pengetahuanmd">Nilai Ketidakpastian (MD)</label>
-                  <input id="pengetahuanmd" name="md" type="number" step=0.01 max=1.00 min=0.20 class="form-control" value="{{$pengetahuan->md}}" placeholder="Masukkan nilai ketidakpastian">
+                  <input id="pengetahuanmd" name="md" type="number" step=0.01 max=1.00 min=0.00 class="form-control" value="{{$pengetahuan->md}}" placeholder="Masukkan nilai ketidakpastian">
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Save</button>
                 <a href="/admin/pengetahuan"><button type="button" class="btn btn-light mr-2">Cancel</button></a>

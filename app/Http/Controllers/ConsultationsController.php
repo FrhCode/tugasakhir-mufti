@@ -56,8 +56,9 @@ class ConsultationsController extends Controller
         foreach ($data_pengetahuan as $pengetahuan) {
             array_push($cf_pakar, ($pengetahuan->mb - $pengetahuan->md));
         }
+
         // Append cf sekuensial (CF Pakar * CF User)
-        for ($i=0; $i<count($cf_pakar); $i++) {
+        for ($i=0; $i<count($cf_user); $i++) {
             array_push($cf_sequential, $cf_pakar[$i] * $cf_user[$i]);
         }
         
