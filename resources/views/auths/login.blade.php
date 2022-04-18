@@ -35,9 +35,9 @@
                     <div class="input-group">
                       <input id="signin-email" name="email" type="email" class="form-control" placeholder="Enter Email">
                       <div class="input-group-append">
-                        <span class="input-group-text">
+                        {{-- <span class="input-group-text">
                           <i class="mdi mdi-check-circle-outline"></i>
-                        </span>
+                        </span> --}}
                       </div>
                     </div>
                   </div>
@@ -47,7 +47,9 @@
                       <input id="signin-password" name="password" type="password" class="form-control" placeholder="Enter Password">
                       <div class="input-group-append">
                         <span class="input-group-text">
-                          <i class="mdi mdi-check-circle-outline"></i>
+                          <button class="pass-button">
+                            <i class="mdi mdi-check-circle-outline"></i>
+                          </button>
                         </span>
                       </div>
                     </div>
@@ -81,6 +83,17 @@
     <script>
       // Dismiss an Alert Message
       $('.alert').alert()
+    </script>
+    <script>
+      $(document).ready(function(){
+        $('.pass-button').on('click', function() {
+          if ($('#signin-password').attr('type', 'text')) {
+            console.log('text')
+          } else{
+            console.log('passwrod')
+          }
+        });
+      });
     </script>
   </body>
 </html>

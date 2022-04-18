@@ -26,7 +26,6 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Info</th>
-                    <th>Saran</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -36,7 +35,6 @@
                             <td>{{ $penyakit->id }}</td>
                             <td>{{ $penyakit->name }}</td>
                             <td>{{ \Illuminate\Support\Str::limit($penyakit->info, 35, $end='...') }}</td>
-                            <td>{{ \Illuminate\Support\Str::limit($penyakit->advice, 35, $end='...') }}</td>
                             <td>
                               <a href="/admin/penyakit/{{$penyakit->id}}/edit"><button class="btn btn-icons btn-light" data-toggle="tooltip" title="Edit data penyakit"><i class="mdi mdi-pencil"></i></button></a>
                               <a href="/admin/penyakit/{{$penyakit->id}}"><button class="btn btn-icons btn-danger" data-toggle="tooltip" title="Hapus data penyakit" onclick="return confirm('Apakah Anda Yakin?')"><i class="mdi mdi-delete"></i></button></a>

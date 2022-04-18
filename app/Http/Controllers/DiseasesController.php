@@ -38,9 +38,8 @@ class DiseasesController extends Controller
     {
         $this->validate($request, [
             'id' => 'unique:diseases|required',
-            'name'=> 'required',
+            'name' => 'required',
             'info' => 'required',
-            'advice' => 'required'
         ]);
 
         Disease::create($request->all());
@@ -87,13 +86,12 @@ class DiseasesController extends Controller
             'id' => 'required',
             'name' => 'required',
             'info' => 'required',
-            'advice' => 'required'
         ]);
 
         $penyakit = Disease::find($id);
         if ($penyakit) {
-           $penyakit->update($request->all());
-           return redirect('/admin/penyakit')->with('success', 'Penyakit berhasil diupdate');
+            $penyakit->update($request->all());
+            return redirect('/admin/penyakit')->with('success', 'Penyakit berhasil diupdate');
         }
 
         return redirect('/admin/penyakit')->with('error', 'ID not found');

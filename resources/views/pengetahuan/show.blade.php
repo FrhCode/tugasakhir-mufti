@@ -29,17 +29,7 @@
                         </div>
                     </div>
                     {{-- Info Box END --}}
-                    {{-- Saran Box --}}
-                    <div class="p-3 rounded-lg bg-success">
-                        <div class="mb-2">
-                            <span class="d-inline mr-1"><i class="fas fa-exclamation-triangle text-light"></i></span>
-                            <span class="d-inline text-light">Saran:</span>
-                        </div>
-                        <div class="pl-4">
-                            <h5 class="text-light">{{ $penyakit->advice }}</h5>
-                        </div>
-                    </div>
-                    {{-- Saran Box END --}}
+                    
                     <table class="table table-striped table-responsive-md my-4">
                         <thead>
                             <tr>

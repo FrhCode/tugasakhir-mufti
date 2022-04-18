@@ -22,10 +22,6 @@
                   <label for="penyakitinfo">Informasi</label>
                   <textarea name="info" class="form-control" id="penyakitinfo" placeholder="Masukkan informasi penyakit"></textarea>
                 </div>
-                <div class="form-group">
-                  <label for="penyakitsaran">Saran</label>
-                  <textarea name="advice" class="form-control" id="penyakitsaran" placeholder="Masukkan saran"></textarea>
-                </div>
                 <button type="submit" class="btn btn-success mr-2">Tambah</button>
                 <a href="/admin/penyakit"><button type="button" class="btn btn-light mr-2">Cancel</button></a>
               </form>

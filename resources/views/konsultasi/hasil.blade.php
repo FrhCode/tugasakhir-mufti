@@ -60,7 +60,7 @@
               <i class="fas fa-plus-square fa-3x"></i>
             </div>
             <div class="col-md-11 col-9 p-0 mb-3">
-              <h5>Hasil Diagnosa:</h5>
+              <h5>Hasil Diagnosis:</h5>
               <h3><strong>{{ $diagnosis['disease']->name }}</strong></h3>
             </div>
           </div>
@@ -78,19 +78,6 @@
               {{-- Info End --}}
             </div>
             <div class="col-md-6">
-              {{-- Saran --}}
-              <div class="card bg-danger border border-light rounded">
-                <div class="card-header">
-                  <div class="d-flex">
-                    <i class="fas fa-exclamation-triangle mr-2 text-success"></i>
-                    <h4 class="text-success"><strong>Saran Pakar</strong></h4>
-                  </div>
-                </div>
-                <div class="card-body bg-success">
-                  <h6 class="card-text text-light">{{ $diagnosis['disease']->advice }}</h6>
-                </div>
-              </div>  
-            {{--Saran End--}}
             </div>
           </div>
           <hr>

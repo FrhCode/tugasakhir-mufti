@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Sipepsi - Sistem diagnosa penyakit epilepsi</title>
+  <title>Sipepsi - Sistem Pendiagnosis Penyakit Epilepsi</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -49,7 +49,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="/">Sipepsi</a></h1>
+      <h1 class="logo mr-auto"><a href="/">SIPEPSI</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -71,9 +71,9 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
     <div class="container">
-      <h1 class="d-inline">Sipepsi</h1>
-      <h2>sistem pakar otomatis pendiagnosa penyakit epilepsi</h2>
-      <a href="/login" class="btn-get-started scrollto">Mulai Diagnosa</a>
+      <h1 class="d-inline">SIPEPSI</h1>
+      <h2>Sistem Pakar Otomatis Pendiagnosis Penyakit Epilepsi</h2>
+      <a href="/login" class="btn-get-started scrollto">Mulai Diagnosis</a>
     </div>
   </section><!-- End Hero -->
 
@@ -86,9 +86,9 @@
         <div class="row">
           <div class="col-lg-4 d-flex align-items-stretch">
             <div class="content">
-              <h3>Mengapa Memilih Sipepsi?</h3>
+              <h3>Mengapa memilih SIPEPSI?</h3>
               <p>
-                Sipepsi merupakan sistem pakar pendiagnosa penyakit epilepsi berbasis metode certainty factor. Untuk tetap menjadi yang terdepan, kami memegang 3 pilar utama pada setiap layanan Sipepsi.
+                Sipepsi merupakan sistem pakar pendiagnosis penyakit epilepsi berbasis metode certainty factor. Untuk tetap menjadi yang terdepan, kami memegang 3 pilar utama pada setiap layanan Sipepsi.
               </p>
             </div>
           </div>
@@ -106,7 +106,7 @@
                   <div class="icon-box mt-4 mt-xl-0">
                     <i class="fas fa-user-check"></i>
                     <h4>Terpercaya</h4>
-                    <p>Informasi dan hasil diagnosa yang dihasilkan sistem akan selalu akurat dan terpercaya, karena telah dikonsultasikan bersama para ahli khusus.</p>
+                    <p>Informasi dan hasil diagnosis yang dihasilkan sistem akan selalu akurat dan terpercaya, karena telah dikonsultasikan bersama para ahli khusus.</p>
                   </div>
                 </div>
                 <div class="col-xl-4 d-flex align-items-stretch">
@@ -130,15 +130,15 @@
 
         <div class="section-title">
           <h2>Layanan</h2>
-          <p>Sipepsi memberikan layanan kesehatan yang cepat, efisien, namun tetap akurat sehingga dapat menghemat waktu dan biaya pengguna.</p>
+          <p>SIPEPSI memberikan layanan kesehatan yang cepat, efisien, namun tetap akurat sehingga dapat menghemat waktu dan biaya pengguna.</p>
         </div>
 
         <div class="row">
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="icon-box">
               <div class="icon"><i class="icofont-heart-beat"></i></div>
-              <h4><a href="">Diagnosa</a></h4>
-              <p>Diagnosa epilepsi dengan cepat dan efisien menggunakan metode certainty factor</p>
+              <h4><a href="">Diagnosis</a></h4>
+              <p>Diagnosis epilepsi dengan cepat dan efisien menggunakan metode certainty factor</p>
             </div>
           </div>
 
@@ -154,7 +154,7 @@
             <div class="icon-box">
               <div class="icon"><i class="icofont-connection"></i></div>
               <h4><a href="">Platform</a></h4>
-              <p>Sipepsi menjadi platform diagnosis epilepsi pertama di Indonesia, memudahkan koneksi para pakar dan pasien/pengguna.</p>
+              <p>SIPEPSI menjadi platform diagnosis epilepsi pertama di Indonesia, memudahkan koneksi para pakar dan pasien/pengguna.</p>
             </div>
           </div>
         </div>
@@ -167,12 +167,12 @@
       <div class="container">
         <div class="section-title">
           <h2>Tenaga Ahli</h2>
-          <p>Sipepsi merupakan aplikasi pendiagnosa yang telah disetujui oleh tenaga ahli penyakit saraf.</p>
+          <p>SIPEPSI merupakan aplikasi pendiagnosis yang telah disetujui oleh tenaga ahli penyakit saraf.</p>
         </div>
             <div class="member d-flex justify-content-center">
               <div class="py-5 text-center">
                 <p class="pb-5">disetujui oleh</p>
-                <h3>dr.Danny Sp.S</h3>
+                <h3>dr. Danny Bagus Agfiandi Sp.N</h3>
                 <p>Dokter Spesialis Saraf</p>
                 <hr>
                 <p>RSUD dr.Slamet Garut</p>
@@ -194,7 +194,7 @@
     <div class="container d-md-flex py-4">
       <div class="mr-md-auto text-center text-md-left">
         <div class="copyright">
-          &copy; Copyright <strong><span>Sipepsi</span></strong> 2021. All Rights Reserved
+          &copy; Copyright <strong><span>SIPEPSI</span></strong> 2022. All Rights Reserved
         </div>
         {{-- <div class="credits">
           <!-- All the links in the footer should remain intact. -->
