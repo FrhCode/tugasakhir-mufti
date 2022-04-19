@@ -32,28 +32,41 @@
                     @csrf
                   <div class="form-group">
                     <label class="label">Email</label>
-                    <div class="input-group">
+                    <div class="mb-3">
+                      <input id="signin-email" name="email" type="email" class="form-control" placeholder="Enter Email">
+                    </div>
+                    {{-- <div class="input-group">
                       <input id="signin-email" name="email" type="email" class="form-control" placeholder="Enter Email">
                       <div class="input-group-append">
-                        {{-- <span class="input-group-text">
+                        <span class="input-group-text">
                           <i class="mdi mdi-check-circle-outline"></i>
-                        </span> --}}
+                        </span>
                       </div>
-                    </div>
+                    </div> --}}
                   </div>
                   <div class="form-group">
                     <label class="label">Password</label>
-                    <div class="input-group">
+                    <div class="mb-3">
+                      <input id="signin-password" name="password" type="password" class="form-control" placeholder="Enter Password">
+                    </div>
+                    {{-- <div class="input-group">
                       <input id="signin-password" name="password" type="password" class="form-control" placeholder="Enter Password">
                       <div class="input-group-append">
                         <span class="input-group-text">
-                          <button class="pass-button">
+                          <input type="button" onclick="togglePassword()">
+                          <button class="pass-button" onclick="togglePassword()">
                             <i class="mdi mdi-check-circle-outline"></i>
                           </button>
                         </span>
                       </div>
-                    </div>
+                    </div> --}}
                   </div>
+
+                  <div class="form-group">
+                    <input type="checkbox" value="" id="flexCheckDefault" onclick="togglePassword()">
+                    <span class="inline-block">Show password</span>
+                  </div>
+
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary submit-btn btn-block">Masuk</button>
                   </div>
@@ -85,15 +98,23 @@
       $('.alert').alert()
     </script>
     <script>
-      $(document).ready(function(){
-        $('.pass-button').on('click', function() {
-          if ($('#signin-password').attr('type', 'text')) {
-            console.log('text')
-          } else{
-            console.log('passwrod')
-          }
-        });
-      });
+      // $(document).ready(function(){
+      //   $('.pass-button').on('click', function() {
+      //     if ($('#signin-password').attr('type', 'text')) {
+      //       console.log('text')
+      //     } else{
+      //       console.log('passwrod')
+      //     }
+      //   });
+      // });
+      function togglePassword () {
+        var x = document.getElementById("signin-password");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
     </script>
   </body>
 </html>
