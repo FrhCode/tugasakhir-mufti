@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: asdd
+      MYSQL_DATABASE: tugasakhir
+    volumes:
+      - ./tugasakhir.sql:/docker-entrypoint-initdb.d/tugasakhir.sql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8181:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: asdd
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env.example
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/sites-available/default
+    ports:
+      - "8020:80"
+    command: bash -c
+      "
+      chmod 777 start.sh &&
+      dos2unix start.sh  &&
+      ./start.sh
+      "
